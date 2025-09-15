@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import PersianDate from './PersianDate.jsx';
+import { useSelector } from 'react-redux';
 
 const Weather = () => {
     const [backMode , setBackMode] = useState('cold')
+
+    const [loading , date , error] = useSelector(state => state)
+    console.log(loading , date , error);
 
     return (
         <div className={`app pt-4 container-fluid back_${backMode}`}>
