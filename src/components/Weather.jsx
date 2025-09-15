@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 const Weather = () => {
     const [backMode , setBackMode] = useState('cold')
 
-    const [loading , date , error] = useSelector(state => state)
+    const {loading , date , error} = useSelector(state => state)
     console.log(loading , date , error);
 
     return (
