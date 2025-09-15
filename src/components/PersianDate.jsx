@@ -37,7 +37,10 @@ const PersianDate = () => {
         let m = moment()
         let finalDate = `${weekDays[m.day()]} ${m.jDate()} ${yearMonth[m.jMonth()]} ماه ${m.jYear()}`
         setDate(finalDate);
-        setTime(moment().format("HH:mm"))
+        setInterval(()=>{
+            let timeNow = moment().format('HH:mm:ss')
+            setTime(timeNow)
+        },1000)
     } ,[])
 
     return (
