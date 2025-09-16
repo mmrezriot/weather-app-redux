@@ -21,11 +21,11 @@ export const sendWeatherFailure = (error) => {
 const getWeatherInfo = (query)=>{
     return dispatch => {
         dispatch(sendWeatherRequest());
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=afd49aa8e1adbcc645858cf13ebcd27a
-&units=metric`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=afd49aa8e1adbcc645858cf13ebcd27a&units=metric`)
         .then(response => {
             const data = response.data;
             dispatch(sendWeatherSuccess(data));
+            console.log(data);
         })
         .catch(error => {
             dispatch(sendWeatherFailure(error.message));
@@ -33,3 +33,5 @@ const getWeatherInfo = (query)=>{
         
     }
 }
+
+export default getWeatherInfo;
