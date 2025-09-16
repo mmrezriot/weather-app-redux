@@ -1,21 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PersianDate from './PersianDate.jsx';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import getWeatherInfo from '../redux/weather/weatherActions.js';
 
 const Weather = () => {
-    const [backMode , setBackMode] = useState('cold')
+    const [backMode , setBackMode] = useState('usual')
     const [query , setQuery] = useState('')
     const {loading , data , error} = useSelector(state => state)
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(data.main){
+            if(data.main.temp < 12){
+                setBackMode('cold')
+            }
+             if(data.main.temp < 20){
+                setBackMode('usual')
+            }
+            else{
+                setBackMode('warm')
+            }
+        }
+    }, [data])  
 
     
 
    
 const handleSubmit = (e) => {
    e.preventDefault();
-   dispatch(getWeatherInfo(query)); // فقط dispatch
+   dispatch(getWeatherInfo(query)); 
 
 
 };
@@ -62,7 +76,7 @@ const handleSubmit = (e) => {
 
             <div className='row justify-content-center py-3 pt-4'>
                 <div className='col-11 col-md-8 col-lg-4 col-xl-3'>
-                    <h1 className='text-center fa-3x lathin_text text_color'>cloudy</h1>
+                    <h1 className='text-center fa-3x lathin_text text_color'>{data.weather[0].main}</h1>
                 </div>
             </div>
 </>
@@ -73,7 +87,6 @@ const handleSubmit = (e) => {
                     </div>
                 </div>  
             ) : null}
-
 
 
         </div>
